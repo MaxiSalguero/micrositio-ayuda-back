@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
-import { Category } from './category.entity';
+import { Category } from '../category/category.entity';
+import { Like } from '../like/like.entity';
 
 export enum PostStatus {
   DRAFT = 'DRAFT',
@@ -31,11 +33,18 @@ export class Post {
   @Column({ length: 255, unique: true })
   slug: string;
 
-  @CreateDateColumn()
+  @Column({ type: 'int', default: 0 })
+  views: number;
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
 
-  @UpdateDateColumn({ nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated: Date | null;
+
+  // Relación bidireccional: un post tiene muchos likes
+  @OneToMany(() => Like, (like) => like.post, { eager: true })
+  likes: Like[];
 
   @ManyToMany(() => Category, (category) => category.post)
   @JoinTable({
