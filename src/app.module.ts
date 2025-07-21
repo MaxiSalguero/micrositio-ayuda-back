@@ -4,12 +4,12 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigModuleOptions } from './config/option';
-import { PostModule } from './modules/post/post.module';
-import { LikeModule } from './modules/like/like.module';
-import { RelatedModule } from './modules/related/related.module';
-import { TaxonomyModule } from './modules/taxonomy/taxonomy.module';
+import { PostModule } from './modules/post.module';
+import { LikeModule } from './modules/like.module';
+import { RelatedModule } from './modules/related.module';
+import { TaxonomyModule } from './modules/taxonomy.module';
 import { DataService } from './scripts/DataService';
-import { CategoryModule } from './modules/category/category.module';
+import { CategoryModule } from './modules/category.module';
 @Module({
   imports: [
     ConfigModule.forRoot(ConfigModuleOptions),

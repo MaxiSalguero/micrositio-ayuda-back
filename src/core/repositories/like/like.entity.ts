@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Post } from '../post/post.entity';
+import { Like as LikeInterface } from '../../../interfaces/like.interface';
 
 @Entity()
-export class Like {
+export class Like implements LikeInterface {
   @PrimaryGeneratedColumn()
   id: number;
 

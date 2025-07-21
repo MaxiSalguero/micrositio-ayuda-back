@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Category } from '../category/category.entity';
 import { Like } from '../like/like.entity';
+import { Post as PostInterface } from '../../../interfaces/post.interface';
 
 export enum PostStatus {
   DRAFT = 'DRAFT',
@@ -17,7 +18,7 @@ export enum PostStatus {
 }
 
 @Entity()
-export class Post {
+export class Post implements PostInterface {
   @PrimaryGeneratedColumn()
   id: number;
 

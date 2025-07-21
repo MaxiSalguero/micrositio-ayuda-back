@@ -1,7 +1,8 @@
 import { IsString, IsEnum, MaxLength, IsArray, IsInt } from 'class-validator';
-import { Post, PostStatus } from '../post.entity';
+import { PostStatus } from '../post.entity';
+import { CreatePostDto as CreatePostDtoInterface } from '../../../../interfaces/post.interface';
 
-export class CreatePostDto {
+export class CreatePostDto implements CreatePostDtoInterface {
   @IsString()
   @MaxLength(255)
   title: string;

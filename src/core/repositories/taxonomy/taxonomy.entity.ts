@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Category } from '../category/category.entity';
+import { Taxonomy as TaxonomyInterface } from '../../../interfaces/taxonomy.interface';
 
 @Entity()
-export class Taxonomy {
+export class Taxonomy implements TaxonomyInterface {
   @PrimaryGeneratedColumn()
   id: number;
 
