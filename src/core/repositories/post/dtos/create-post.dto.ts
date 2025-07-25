@@ -19,5 +19,5 @@ export class CreatePostDto implements CreatePostDtoInterface {
 
   @IsArray()
   @IsInt({ each: true })
-  categoryIds: number[];
+  category: number[];
 }

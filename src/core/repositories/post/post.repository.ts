@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Post } from './post.entity';
 
 @Injectable()
@@ -10,8 +10,8 @@ export class PostRepository {
     private readonly postRepo: Repository<Post>,
   ) {}
 
-  async create(postDto: Partial<Post>): Promise<Post> {
-    const newPost = this.postRepo.create(postDto);
+  async create(postData: Partial<Post>): Promise<Post> {
+    const newPost = this.postRepo.create(postData);
     return this.postRepo.save(newPost);
   }
 
@@ -20,6 +20,10 @@ export class PostRepository {
       where: { id },
       relations: ['category', 'likes'],
     });
+  }
+
+  async findByIds(ids: number[]): Promise<Post[]> {
+    return this.postRepo.findBy({ id: In(ids) });
   }
 
   async findAll(): Promise<Post[]> {

@@ -7,5 +7,5 @@ export class CreateTaxonomyDto implements CreateTaxonomyDtoInterface {
 
   @IsInt()
   @IsOptional()
-  parent?: number;
+  parent: number;
 }

@@ -13,7 +13,7 @@ export class PostsService {
 
   async create(postDto: CreatePostDto): Promise<Post> {
     const categories = await this.categoryRepository.findByIds(
-      postDto.categoryIds,
+      postDto.category,
     );
     if (!categories.length) {
       throw new NotFoundException('No categories found for the given IDs');

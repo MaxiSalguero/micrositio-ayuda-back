@@ -22,11 +22,26 @@ export class DataService {
   async loadDataByDefault(): Promise<void> {
     // 1. Categorías
     const categories = [
-      { title: 'General', slug: 'general' },
-      { title: 'Cuentas', slug: 'cuentas' },
-      { title: 'Seguridad', slug: 'seguridad' },
-      { title: 'Contraseñas', slug: 'contrasenas' },
-      { title: 'Eliminación', slug: 'eliminacion' },
+      {
+        title: 'General',
+        slug: 'general',
+      },
+      {
+        title: 'Cuentas',
+        slug: 'cuentas',
+      },
+      {
+        title: 'Seguridad',
+        slug: 'seguridad',
+      },
+      {
+        title: 'Contraseñas',
+        slug: 'contrasenas',
+      },
+      {
+        title: 'Eliminación',
+        slug: 'eliminacion',
+      },
     ];
     const createdCategories: Category[] = [];
     for (const cat of categories) {
@@ -56,28 +71,28 @@ export class DataService {
         content: 'Paso a paso para crear una cuenta...',
         status: PostStatus.PUBLISHED,
         slug: 'como-crear-una-cuenta',
-        categoryIds: [createdCategories[1].id], // Cuentas
+        category: [createdCategories[1].id], // Cuentas
       },
       {
         title: '¿Cómo restablecer la contraseña?',
         content: 'Guía para restablecer tu contraseña...',
         status: PostStatus.PUBLISHED,
         slug: 'como-restablecer-la-contrasena',
-        categoryIds: [createdCategories[3].id], // Contraseñas
+        category: [createdCategories[3].id], // Contraseñas
       },
       {
         title: '¿Cómo cambiar el correo?',
         content: 'Instrucciones para cambiar tu correo...',
         status: PostStatus.PUBLISHED,
         slug: 'como-cambiar-el-correo',
-        categoryIds: [createdCategories[1].id], // Cuentas
+        category: [createdCategories[1].id], // Cuentas
       },
       {
         title: '¿Cómo eliminar la cuenta?',
         content: 'Pasos para eliminar tu cuenta...',
         status: PostStatus.PUBLISHED,
         slug: 'como-eliminar-la-cuenta',
-        categoryIds: [createdCategories[4].id], // Eliminación
+        category: [createdCategories[4].id], // Eliminación
       },
     ];
     const createdPosts: Post[] = [];
