@@ -16,11 +16,21 @@ export class CategoryRepository {
   }
 
   async findById(id: number): Promise<Category | null> {
-    return this.categoryRepo.findOne({ where: { id } });
+    return this.categoryRepo.findOne({
+      where: { id },
+      relations: ['post'],
+    });
+  }
+
+  async findByTitle(title: string): Promise<Category | null> {
+    return this.categoryRepo.findOne({
+      where: { title: title },
+      relations: ['post'],
+    });
   }
 
   async findAll(): Promise<Category[]> {
-    return this.categoryRepo.find();
+    return this.categoryRepo.find({ relations: ['post'] });
   }
 
   async findByIds(ids: number[]): Promise<Category[]> {

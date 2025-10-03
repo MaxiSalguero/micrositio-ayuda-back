@@ -10,6 +10,8 @@ import { RelatedModule } from './modules/related.module';
 import { TaxonomyModule } from './modules/taxonomy.module';
 import { DataService } from './scripts/DataService';
 import { CategoryModule } from './modules/category.module';
+import { SearchModule } from './modules/search.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(ConfigModuleOptions),
@@ -33,6 +35,7 @@ import { CategoryModule } from './modules/category.module';
     LikeModule,
     RelatedModule,
     TaxonomyModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [AppService, DataService],

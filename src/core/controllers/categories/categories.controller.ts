@@ -20,4 +20,9 @@ export class CategoriesController {
   findById(@Param('id') id: number) {
     return this.categoryService.findById(Number(id));
   }
+
+  @Get('category/:title')
+  findByTitle(@Param('title') title: string) {
+    return this.categoryService.findByTitle(title);
+  }
 }

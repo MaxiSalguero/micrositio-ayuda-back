@@ -34,6 +34,10 @@ export class CategoryService {
     return this.categoryRepository.findById(id);
   }
 
+  findByTitle(title: string): Promise<Category | null> {
+    return this.categoryRepository.findByTitle(title);
+  }
+
   findAll(): Promise<Category[]> {
     return this.categoryRepository.findAll();
   }
