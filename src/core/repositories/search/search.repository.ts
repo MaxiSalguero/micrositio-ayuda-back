@@ -10,20 +10,14 @@ export class SearchRepository {
     private searchRepository: Repository<Post>,
   ) {}
 
-  async searchLupa(query: string): Promise<Post[]> {
-    if (!query || query.trim() === '') {
-      return [];
-    }
-
-    const words = query
-      .trim()
-      .split(' ')
-      .filter((word) => word.length > 0);
+  async searchLupa(query: string, count: number): Promise<Post[]> {
+    const words = query.split(' ').filter((word) => word.length > 0);
 
     const queryBuilder = this.searchRepository
       .createQueryBuilder('post')
+      .select('post')
+      .distinct(true) // evita duplicados por joins
       .leftJoinAndSelect('post.category', 'category')
-      .leftJoinAndSelect('post.likes', 'likes')
       .where('post.status = :status', { status: 'PUBLISHED' });
 
     words.forEach((word, index) => {
@@ -42,6 +36,7 @@ export class SearchRepository {
     const results = await queryBuilder
       .orderBy('post.views', 'DESC')
       .addOrderBy('post.created', 'DESC')
+      .take(count)
       .getMany();
 
     return results;

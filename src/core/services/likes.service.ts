@@ -12,7 +12,9 @@ export class LikesService {
   ) {}
 
   async create(likeDto: CreateLikeDto): Promise<Like> {
-    const post = await this.postRepository.findById(likeDto.post);
+    const post = await this.postRepository.findByIdWithoutIncrement(
+      likeDto.post,
+    );
     if (!post) {
       throw new NotFoundException('Post not found');
     }

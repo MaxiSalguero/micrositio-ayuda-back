@@ -6,8 +6,8 @@ import { Post } from '../repositories/post/post.entity';
 export class SearchService {
   constructor(private searchRepository: SearchRepository) {}
 
-  async searchLupa(query: string): Promise<Post[]> {
-    return this.searchRepository.searchLupa(query);
+  async searchLupa(query: string, count: number): Promise<Post[]> {
+    return this.searchRepository.searchLupa(query, count);
   }
 
   async searchByCategory(categoryId: number): Promise<Post[]> {

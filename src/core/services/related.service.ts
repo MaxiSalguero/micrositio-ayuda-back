@@ -12,11 +12,13 @@ export class RelatedService {
   ) {}
 
   async create(dto: CreateRelatedDto): Promise<Related> {
-    const post = await this.postRepository.findById(dto.post);
+    const post = await this.postRepository.findByIdWithoutIncrement(dto.post);
     if (!post) {
       throw new NotFoundException('Post not found');
     }
-    const related = await this.postRepository.findById(dto.related);
+    const related = await this.postRepository.findByIdWithoutIncrement(
+      dto.related,
+    );
     if (!related) {
       throw new NotFoundException('Related post not found');
     }

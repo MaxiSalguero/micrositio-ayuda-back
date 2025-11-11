@@ -1,4 +1,5 @@
 import { Controller, Get, Query, Param, ParseIntPipe } from '@nestjs/common';
+import { SearchDto } from 'src/core/repositories/search/dtos/search.dto';
 import { SearchService } from 'src/core/services/search.service';
 
 @Controller('search')
@@ -6,8 +7,8 @@ export class SearchController {
   constructor(private searchService: SearchService) {}
 
   @Get()
-  async searchGeneral(@Query('q') query: string) {
-    return this.searchService.searchLupa(query);
+  async searchGeneral(@Query() query: SearchDto) {
+    return this.searchService.searchLupa(query.q, query.count);
   }
 
   @Get('category/:categoryId')

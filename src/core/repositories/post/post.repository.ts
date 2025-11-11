@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { Post } from './post.entity';
@@ -15,11 +15,30 @@ export class PostRepository {
     return this.postRepo.save(newPost);
   }
 
-  async findById(id: number): Promise<Post | null> {
-    return this.postRepo.findOne({
+  async findByIdWithoutIncrement(id: number): Promise<Post | null> {
+    const post = await this.postRepo.findOne({
       where: { id },
       relations: ['category', 'likes'],
     });
+
+    if (!post) throw new NotFoundException('Post not found');
+
+    return post;
+  }
+
+  async findById(id: number): Promise<Post | null> {
+    const post = await this.postRepo.findOne({
+      where: { id },
+      relations: ['category', 'likes'],
+    });
+
+    if (!post) throw new NotFoundException('Post not found');
+
+    await this.postRepo.increment({ id }, 'views', 1);
+
+    post.views++;
+
+    return post;
   }
 
   async findByIds(ids: number[]): Promise<Post[]> {
